@@ -18,6 +18,7 @@ class Solution:
     def candy(self, ratings: List[int]) -> int:
         children = len(ratings)
         ratings_set = set(ratings)
+        ratings_set = sorted(ratings_set)
         print(ratings_set)
         
         # if all ratings are the same, return number of children
@@ -46,12 +47,12 @@ class Solution:
             stageDict[rating].append(i)
         
         res_list = flattened_list.copy()
-        print(stageDict)
+        # print(stageDict)
         
         for stage in range(1, num_stages+1):
-            print(f"CURRENT STAGE: {stage}")
+            # print(f"CURRENT STAGE: {stage}")
             if stage == 1:
-                print(f"sum: {sum(res_list)}, {res_list}")
+                # print(f"sum: {sum(res_list)}, {res_list}")
                 continue
             
             for i in stageDict[stage]:
@@ -106,43 +107,43 @@ class Solution:
                             # if previously min and now mid, set as min
                             if min_flat.index == mid_flat.index:
                                 res_list[i] = min_res.val
-                                print("min->mid")
+                                # print("min->mid")
                             
                             # if previously mid and still mid, set as min+1
                             elif mid_flat.index == mid_res.index:
                                 res_list[i] = min_res.val + 1
-                                print("mid->mid")
+                                # print("mid->mid")
                                 
                                 # unless min and mid flats were originally equal
                                 # and min is now not max
                                 if min_flat.val == mid_flat.val and min_flat.index != max_res.index:
                                     res_list[i] = min_res.val
-                                    print("odd case")
+                                    # print("odd case")
 
                         # max
                         elif cur == max_res.val:
                             # if previously min and now max, set as 1
                             if min_flat.index == max_res.index:
                                 res_list[i] = 1
-                                print("min->max")
+                                # print("min->max")
                             
                             # if previously mid and now max, set as min+1
                             elif mid_flat.index == max_res.index:
                                 res_list[i] = min_res.val + 1
-                                print("mid->max")
+                                # print("mid->max")
                             
                             # if previously max and still max, set as mid+1
                             elif max_flat.index == max_res.index:
                                 res_list[i] = mid_res.val + 1
-                                print("max->max")
+                                # print("max->max")
                                 
                                 # unless mid and max flats were originally equal
                                 # and mid is now not min
                                 if max_flat.val == mid_flat.val and mid_flat.index != min_res.index:
                                     res_list[i] = min_res.val + 1
-                                    print("odd case")
+                                    # print("odd case")
 
-                print(f"sum: {sum(res_list)}, {res_list}, {i}")
+                # print(f"sum: {sum(res_list)}, {res_list}, {i}")
                             
         total = sum(res_list)
         # print(total)
