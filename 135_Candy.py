@@ -133,9 +133,7 @@ class Solution:
     
     def flattenList(self, ratings: List[int]):
         children = len(ratings)
-        ratings_set = set(ratings)
-        ratings_set = sorted(ratings_set)
-        # print(ratings_set)
+        ratings_set = sorted(set(ratings))
         
         # if all ratings are the same, return number of children
         num_stages = len(ratings_set)
@@ -152,8 +150,7 @@ class Solution:
             flattened_list.append(ratings_dict[rating])
 
         return (flattened_list, num_stages)
-        
-  
+                
                 
 if __name__ == '__main__':
     ratings_list = [
@@ -166,6 +163,7 @@ if __name__ == '__main__':
         [1,1,1,2,2,2,3,3,3,4,4,4,5,5,5],
         [1,2,87,87,87,2,1],
         [29,51,87,87,72,12],
+        [2,3,5,5,4,1],
         [82,47,25,94,89,54,26,54,54,99],
         [10,10,10,10,10,10]
     ]
@@ -174,7 +172,7 @@ if __name__ == '__main__':
     res_list = []
     for rating in ratings_list:
         res_list.append(sol.candy(rating))
-        print("=====================")
+        # print("=====================")
 
     print(res_list)
-    print(len(ratings_list[-1]))
+    # print(len(ratings_list[-1]))
