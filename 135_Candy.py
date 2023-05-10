@@ -16,29 +16,10 @@ class KVPair:
     
 class Solution:
     def candy(self, ratings: List[int]) -> int:
-        children = len(ratings)
-        ratings_set = set(ratings)
-        ratings_set = sorted(ratings_set)
-        print(ratings_set)
+        flattened_list, num_stages = self.flattenList(ratings)
         
-        # if all ratings are the same, return number of children
-        num_stages = len(ratings_set)
-        if num_stages == 1:
-            return children
-        
-        # flatten ratings and sort
-        ratings_dict = {}
-        flattened_list = []
-        for cur_weight, rating in enumerate(ratings_set):
-            ratings_dict[rating] = cur_weight+1
-            
-        for rating in ratings:
-            flattened_list.append(ratings_dict[rating])
-        
-        print(flattened_list)
-        
-        res_list = flattened_list.copy()
-        
+        # print(flattened_list)
+
         stageDict = {}
         for stage in range(1, num_stages+1):
             stageDict[stage] = []
@@ -117,7 +98,7 @@ class Solution:
                                 # unless min and mid flats were originally equal
                                 # and min is now not max
                                 if min_flat.val == mid_flat.val and min_flat.index != max_res.index:
-                                    res_list[i] = min_res.val
+                                    res_list[i] = 1
                                     # print("odd case")
 
                         # max
@@ -149,6 +130,28 @@ class Solution:
         # print(total)
         
         return total
+    
+    def flattenList(self, ratings: List[int]):
+        children = len(ratings)
+        ratings_set = set(ratings)
+        ratings_set = sorted(ratings_set)
+        # print(ratings_set)
+        
+        # if all ratings are the same, return number of children
+        num_stages = len(ratings_set)
+        if num_stages == 1:
+            return [1 for _ in range(children)], 1
+        
+        # flatten ratings and sort
+        ratings_dict = {}
+        flattened_list = []
+        for cur_weight, rating in enumerate(ratings_set):
+            ratings_dict[rating] = cur_weight+1
+            
+        for rating in ratings:
+            flattened_list.append(ratings_dict[rating])
+
+        return (flattened_list, num_stages)
         
   
                 
@@ -162,7 +165,9 @@ if __name__ == '__main__':
         [2,5,1,5,1,3,4,4,2,1,3,3,2,4,5],
         [1,1,1,2,2,2,3,3,3,4,4,4,5,5,5],
         [1,2,87,87,87,2,1],
-        [29,51,87,87,72,12]
+        [29,51,87,87,72,12],
+        [82,47,25,94,89,54,26,54,54,99],
+        [10,10,10,10,10,10]
     ]
     sol = Solution()
     
@@ -172,3 +177,4 @@ if __name__ == '__main__':
         print("=====================")
 
     print(res_list)
+    print(len(ratings_list[-1]))
