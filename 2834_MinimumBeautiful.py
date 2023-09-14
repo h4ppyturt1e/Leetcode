@@ -4,27 +4,9 @@ class Solution:
         halfMark = target // 2
         
         if halfMark > n:
-            totalSum = 0
-            cur = 1
-            totalNums = 0
-            halfMark = target // 2
-            while totalNums < n:
-                if cur == halfMark + 1:
-                    cur = target
-                totalSum += cur
-                # print(cur, end=",")
-                cur += 1
-                totalNums += 1
-        
-        else:
-            firstHalf = sumRange(1, halfMark)
-            
-            secondHalf = sumRange(target, n - halfMark)
-            # print(f"n: {n}, target: {target}, halfMark: {halfMark}, firstHalf: {firstHalf}, secondHalf: {secondHalf}")
-            totalSum = firstHalf + secondHalf
-        
-        return totalSum % (10 ** 9 + 7)
+            return sumRange(1, n) % (10 ** 9 + 7)
     
+        return (sumRange(1, halfMark) + sumRange(target, n - halfMark)) % (10 ** 9 + 7)
 
 if __name__ == '__main__':
     soln = Solution()
